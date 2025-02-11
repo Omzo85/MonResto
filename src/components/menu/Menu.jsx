@@ -1,6 +1,6 @@
 import React from 'react';
-import { dishes } from './data/Dishes';
-import './styles/Menu.css';
+import { dishes } from '../../data/Dishes';
+import './Menu.css';
 import { Link } from 'react-router-dom';
 
 function Menu() {

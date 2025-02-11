@@ -1,18 +1,19 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { CartProvider } from './context/CartContext';
-import './components/styles/App.css';
-import Home from './components/pages/Home';
-import Login from './components/pages/Login';
-import DishDetail from './components/pages/DishDetail';
-import Cart from './components/pages/Cart';
+import './App.css';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import DishDetail from './pages/DishDetail';
+import Cart from './pages/Cart';
 import { AuthProvider } from './context/AuthContext';
-import Header from './components/Header';
 import PrivateRoute from './components/PrivateRoute';
-import Footer from './components/Footer';
-import AdminLogin from './components/pages/AdminLogin';
+import Footer from './components/Footer/Footer';
+import AdminLogin from './pages/AdminLogin';
 import ProtectedAdminRoute from './components/ProtectedAdminRoute';
-import AdminDashboard from './components/AdminDashboard';
+import AdminDashboard from './components/adminDashboard/AdminDashboard';
+import Header from './components/Header/Header';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
               <Route path="/admin/login" element={<AdminLogin />} />
               <Route path="/login" element={<Login />} />
               <Route path="/dish/:id" element={<DishDetail />} />
+              <Route path="*" element={<NotFound />} />
               <Route 
                 path="/cart" 
                 element={

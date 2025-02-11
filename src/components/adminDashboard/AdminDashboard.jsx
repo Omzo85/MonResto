@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { dishes } from '../components/data/Dishes';
-import './styles/AdminDashboard.css';
+import { dishes } from '../../data/Dishes';
+import './AdminDashboard.css';
 
 function AdminDashboard() {
   const [activeTab, setActiveTab] = useState('dishes');

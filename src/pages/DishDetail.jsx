@@ -1,8 +1,8 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { dishes } from '../data/Dishes';
-import { useCart } from '../../context/CartContext'; // Ajout de l'import
-import '../styles/DishDetail.css';
+import { useCart } from '../context/CartContext'; // Ajout de l'import
+import './DishDetail.css';
 
 function DishDetail() {
   const { id } = useParams();

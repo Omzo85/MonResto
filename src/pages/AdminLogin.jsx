@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import '../styles/AdminLogin.css'; // Nous allons créer ce fichier CSS
+import './AdminLogin.css'; // Nous allons créer ce fichier CSS
 
 function AdminLogin() {
   const [email, setEmail] = useState('');
