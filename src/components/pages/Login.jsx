@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 import '../styles/Login.css';
 
 function Login() {
@@ -6,10 +8,24 @@ function Login() {
     email: '',
     password: ''
   });
+  const { login, error, user } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Si l'utilisateur est déjà connecté, rediriger vers la page d'accueil
+  if (user) {
+    navigate('/');
+    return null;
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    const success = login(formData.email, formData.password);
+    if (success) {
+      // Rediriger vers la page précédente ou l'accueil
+      const from = location.state?.from?.pathname || '/';
+      navigate(from);
+    }
   };
 
   const handleChange = (e) => {
@@ -23,6 +39,7 @@ function Login() {
     <div className="login-container">
       <form className="login-form" onSubmit={handleSubmit}>
         <h2>Connexion</h2>
+        {error && <div className="error-message">{error}</div>}
         <div className="form-group">
           <label htmlFor="email">Email</label>
           <input
@@ -46,6 +63,11 @@ function Login() {
           />
         </div>
         <button type="submit" className="login-button">Se connecter</button>
+        <p className="login-info">
+          Pour tester : <br />
+          Email : test@example.com<br />
+          Mot de passe : password123
+        </p>
       </form>
     </div>
   );

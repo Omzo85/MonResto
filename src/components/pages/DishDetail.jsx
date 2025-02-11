@@ -1,15 +1,22 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { dishes } from '../data/Dishes';
+import { useCart } from '../../context/CartContext'; // Ajout de l'import
 import '../styles/DishDetail.css';
 
 function DishDetail() {
   const { id } = useParams();
+  const { addToCart } = useCart(); // Utilisation du hook useCart
   const dish = dishes.find(d => d.id === id);
 
   if (!dish) {
     return <div className="dish-not-found">Plat non trouvé</div>;
   }
+
+  // Fonction pour gérer l'ajout au panier
+  const handleAddToCart = () => {
+    addToCart(dish);
+  };
 
   return (
     <div className="dish-detail">
@@ -23,7 +30,12 @@ function DishDetail() {
           <p className="dish-ingredients"><strong>Ingrédients:</strong> {dish.ingredients}</p>
           <p className="dish-price"><strong>Prix:</strong> {dish.price}€</p>
         </div>
-        <button className="add-to-cart">Ajouter au panier</button>
+        <button 
+          className="add-to-cart"
+          onClick={handleAddToCart} // Ajout du gestionnaire d'événement
+        >
+          Ajouter au panier
+        </button>
       </div>
     </div>
   );
