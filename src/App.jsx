@@ -23,9 +23,7 @@ function App() {
           <div className="app-container">
             <Header />
             <Routes>
-            <Route 
-  path="/admin/dashboard" 
-  element={
+            <Route path="/admin/dashboard" element={
     <ProtectedAdminRoute>
       <AdminDashboard />
     </ProtectedAdminRoute>

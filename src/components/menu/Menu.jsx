@@ -1,12 +1,27 @@
 import React from 'react';
-import { dishes } from '../../data/Dishes';
-import './Menu.css';
 import { Link } from 'react-router-dom';
+import { useCart } from '../../context/CartContext';
+import { useAuth } from '../../context/AuthContext';
+import { dishes } from '../../data/dishes';
+import './Menu.css';
 
 function Menu() {
+  const { addToCart } = useCart();
+  const { user } = useAuth();
+  
   const entrees = dishes.filter(dish => dish.category === 'entrees');
   const plats = dishes.filter(dish => dish.category === 'plats');
   const desserts = dishes.filter(dish => dish.category === 'desserts');
+
+  const handleAddToCart = (dish, event) => {
+    event.preventDefault();
+    if (!user) {
+      alert('Veuillez vous connecter pour ajouter des articles au panier');
+      return;
+    }
+    addToCart(dish);
+    alert('Article ajouté au panier !');
+  };
 
   const renderDishSection = (title, items) => (
     <>
@@ -19,8 +34,17 @@ function Menu() {
             <div className="Description">
               <div className="plat-nom">{item.name}</div>
               <div className="plat-description">{item.description}</div>
+              <div className="plat-price">{item.price.toFixed(2)}€</div>
             </div>
-            <img src={item.image} alt={item.name} />
+            <div className="image-container">
+              <img src={item.image} alt={item.name} />
+              <button 
+                className="add-to-cart-button"
+                onClick={(e) => handleAddToCart(item, e)}
+              >
+                <i className="fas fa-cart-plus"></i> Ajouter au panier
+              </button>
+            </div>
           </Link>
         ))}
       </div>
